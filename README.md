@@ -14,6 +14,7 @@ https://www.arcgis.com/index.html
 *A software library for reading/writing several geospatial data formats*
 https://gdal.org/
 
+<br>
 
 #### Data Viz Tools
 
@@ -33,5 +34,5 @@ https://gephi.org/
 *Web-based text analysis application*
 https://voyant-tools.org/
 
-
+<br>
 #### Hands On Material
