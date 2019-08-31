@@ -3,34 +3,34 @@
 #### Mapping Software
 <br>
 ###### QGIS (free & open source) GIS software
-Platforms: MacOS, Windows, Linux, Andriod (beta)
+<em>Platforms: MacOS, Windows, Linux, Andriod (beta)</em>
 https://qgis.org/en/site/
 <br>
 ###### ArcGIS (commercial) GIS software
-Platform: Windows
+<em>Platform: Windows</em>
 https://www.arcgis.com/index.html
 <br>
 ###### GDAL (Geospatial Data Abstraction Library)
-A software library for reading/writing several geospatial data formats
+<em>A software library for reading/writing several geospatial data formats</em>
 https://gdal.org/
 <br>
 
 #### Data Viz Tools
 <br>
 ###### Tablaeu
-Interactive data visualization software
+<em>Interactive data visualization software</em>
 https://www.tableau.com/
 <br>
 ###### Palladio
-A visualization platform from Stanford University
+<em>A visualization platform from Stanford University</em>
 https://hdlab.stanford.edu/palladio/
 <br>
 ###### Gephi
-Open-source network analysis and visualization software
+<em>Open-source network analysis and visualization software</em>
 https://gephi.org/
 <br>
 ###### Voyant Tools
-Web-based text analysis application
+<em>Web-based text analysis application</em>
 https://voyant-tools.org/
 <br>
 
