@@ -36,3 +36,11 @@ https://voyant-tools.org/
 
 <br>
 #### Hands On Material
+
+
+##### D3.js Visuzualition
+Using D3.js and GIS file format (GEOJSON), you can create accurate maps and style them to your needs. This example shows how easy it can be for your own data to be mapped with D3.js.
+https://mhshaaban.github.io/Marburg_2019_material/index.html
+<br>
+Using SVG Crowbar, which you can save for quick reference on your Google Chrome page, allows you to download the image as a SVG file and edit it in Adobe Illustrator, extending the use of your map.
+https://github.com/NYTimes/svg-crowbar/issues/32
