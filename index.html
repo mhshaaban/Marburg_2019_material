@@ -1,106 +1,42 @@
-<!DOCTYPE html>
-<meta charset="utf-8">
-<script src="//d3js.org/d3.v3.min.js"></script>
-<body>
-<script>
-var width = 960;
-var height = 700;
-
-var projection = d3.geo.mercator();
-var path = d3.geo.path().projection(projection);
-
-var zoom = d3.behavior.zoom()
-  .on('zoom', zoomed);
-
-function zoomed()
-{
-  projection.translate(zoom.translate());
-  projection.scale(zoom.scale());
-  geoLayer.selectAll('path')
-    .attr('d', path);
-}
-
-var svg = d3.select('body')
-  .append('svg')
-  .attr('width', width)
-  .attr('height', height)
-  .call(zoom);
-
-var geoLayer = svg.append('g').attr('transform','translate(0,0) scale(1)');
-var ddLayer = svg.append('g');
-
-ddLayer.on('dragenter', function()
-  {
-    d3.event.preventDefault();
-  })
-  .on('dragover', function()
-  {
-    d3.event.preventDefault();
-  })
-  .on('dragend', function()
-  {
-    d3.event.preventDefault();
-  })
-  .on('drop', function()
-  {
-    d3.event.stopPropagation();
-    d3.event.preventDefault();
-    var f = d3.event.dataTransfer.files[0];
-    var reader = new FileReader();
-    reader.onload = (function(_f)
-    {
-      return function(_g)
-      {
-        var dat = JSON.parse(_g.target.result);
-        geoLayer.selectAll('*').remove();
-        projection.translate([width / 2, height / 2]);
-        var s = [10,100000];
-        var bounds = dat.features.map(function(d){return d3.geo.bounds(d);});
-        var bound = {type:'Feature',properties:{},geometry:{type:'MultiPoint',coordinates:[[d3.min(bounds,function(d){return d[0][0];}),d3.min(bounds,function(d){return d[0][1];})],[d3.max(bounds,function(d){return d[1][0];}),d3.max(bounds,function(d){return d[1][1];})]]}};
-        projection.center([(bound.geometry.coordinates[0][0]+bound.geometry.coordinates[1][0])/2, (bound.geometry.coordinates[0][1]+bound.geometry.coordinates[1][1])/2])
-        while (true)
-        {
-          var ss = (s[0]+s[1])/2;
-          projection.scale(ss);
-          var b = path.bounds(bound);
-          if ( b[0][0] != Infinity && b[0][0] >= 0 && b[0][1] >= 0 && b[1][0] <= width && b[1][1] <= height)
-          {
-            s[0] = ss;
-          }
-          else
-          {
-            s[1] = ss;
-          }
-          if (s[1] - s[0] < 10)
-          {
-            projection.scale(s[0]);
-            zoom.scale(s[0]).translate([width/2, height/2]);
-            geoLayer.selectAll('path')
-              .data(dat.features)
-              .enter()
-              .append('path')
-              .attr('d', path)
-              .attr('stroke', function(d){return (d.geometry.type=='LineString'||d.geometry.type=='MultiLineString')?'steelblue':'#FFF';})
-              .attr('stroke-width', function(d){return (d.geometry.type=='LineString'||d.geometry.type=='MultiLineString')?4:0.5;})
-              .attr('fill', function(d){return (d.geometry.type=='LineString'||d.geometry.type=='MultiLineString')?'none':'steelblue';});
-            ddLayer.attr('visibility','hidden');
-            return;
-          }
-        }
-      };
-    })(f);
-    reader.readAsText(f);
-  });
-
-ddLayer.append('rect')
-  .attr({x:0,y:0,width:width,height:height,fill:'rgba(0,0,0,0.5)',stroke:'none'})
-  .on('drop', function()
-  {
-    d3.event.preventDefault();
-  });
-
-ddLayer.append('text')
-  .attr({'font-size':64,'font-family': 'Noto Sans, sans-serif','fill':'#FFF','x':width/2,'y':height-32,'text-anchor':'middle'})
-  .text('Drop GeoJSON here to visualize');
-
-</script>
+<DOCTYPE html>
+  <meta charset="utf-8">
+  <style>
+      /* CSS goes here. */
+  </style>
+  
+  <body>
+    
+      //bring in tools
+    <script="http://d3.js.org/d3.v3.min.js"></script>
+    <script="http://d3.js.org/queue.v1.min.js"></script>
+    <script="http://d3.js.org/topojson.v1.min.js"></script>
+    
+    <script>
+      
+      //sets up the "container" for the image
+      
+      var width = 960,
+          height = 1000;
+      
+      //set up on projection
+      var projection = d3.geo.mercator()
+        .scale(500)
+      .translate([width / 2, height /2]);
+      
+      var path = d3.geo.path()
+      .projection(projection);
+      
+      //sets up the image
+      var svg = d3.select("body").append("svg")
+      .attr("width", width)
+      .attr("height", height);
+            
+      //loads the GeoJSON
+            d3.json("egypt.json", function(error, egypt) {
+            svg.append("path")
+        .data(topojson.feature(egypt, egypt.objects['collection']).features)
+        .attr("d", pth);
+        
+      });
+      
+    </script>
